@@ -27,7 +27,7 @@ The schedule file will appear in the directory with the code
 example:
 
 ```
-python creating_schedule.py10
+python creating_schedule.py 10
 ```
 
 # Project Goals
