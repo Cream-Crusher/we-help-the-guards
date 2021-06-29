@@ -1,2 +1,1 @@
-datetime==20.2.3
 docxtpl==20.2.3
