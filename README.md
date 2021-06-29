@@ -13,7 +13,7 @@ pip install -r requirements.txt
 example:
 
 ```
-$ python creating_schedule.py
+$ python creating_schedule.py 10
 ```
 
 ### You will see
