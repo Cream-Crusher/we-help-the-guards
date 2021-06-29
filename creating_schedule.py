@@ -5,21 +5,21 @@ from datetime import timedelta, datetime
 from docxtpl import DocxTemplate
 
 
-def save_file(schedule_territories, current_date):
+def save_file(schedule_territories, current_date, num_day):
     doc = DocxTemplate("pattern.docx")
     context = {
         'now_day_from': current_date,
-        'now_day_before': current_date + timedelta(days=1),
+        'now_day_before': current_date + timedelta(days=num_day),
         'schedule_territories': schedule_territories
     }
     doc.render(context)
     doc.save("security_guard_bypass_schedule.docx")
-    
+
 
 def get_schedule(set_time, objects, base=5):
     schedule_territories = {}
 
-    for num in range(0, args.start):
+    for num_day in range(0, args.start):
         territories = {}
         
         for territory in objects:
@@ -42,8 +42,8 @@ def get_schedule(set_time, objects, base=5):
 
                 territories.update({territory: schedule})
 
-        schedule_territories.update({num+1: territories})
-    return schedule_territories
+        schedule_territories.update({num_day+1: territories})
+    return schedule_territories, num_day
 
 
 def get_datetime():
@@ -58,11 +58,11 @@ def get_args():
     parser.add_argument('start', default='1', help='кол дней', type=int)
     args = parser.parse_args()
     return args
-    
+
 
 if __name__ == '__main__':
     args = get_args()
     objects = ['ГСМ', 'Cтоянка', 'Ангар']
     current_date, set_time = get_datetime()
-    schedule_territories = get_schedule(set_time, objects)
-    save_file(schedule_territories, current_date)
+    schedule_territories, num_day = get_schedule(set_time, objects)
+    save_file(schedule_territories, current_date, num_day)
