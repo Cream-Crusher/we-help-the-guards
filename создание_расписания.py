@@ -4,34 +4,32 @@ from datetime import timedelta, datetime
 from docxtpl import DocxTemplate
 
 
-def world(now, schedule_territories):
-    now_day = datetime(now.year, now.month, now.day)
+def save_file(schedule_territories, current_date):
     doc = DocxTemplate("pattern.docx")
     context = {
-    'now_day_from': now_day,
-    'now_day_before': now_day + timedelta(days=1),
+    'now_day_from': current_date,
+    'now_day_before': current_date + timedelta(days=1),
     'schedule_territories': schedule_territories
     }
     doc.render(context)
     doc.save("security_guard_bypass_schedule.docx")
 
 
-def get_a_schedule_rounded_to_5(set_time, base=5):
-    territories = ['ГСМ', 'Cтоянка', 'Ангар']
+def get_schedule(set_time, objects, base=5):
     schedule_territories = {}
-
-    for territory in territories:
+    
+    for territory in objects:
         schedule = []
         crawl_time = set_time
-        num = 0
+        key = 0
 
         while crawl_time.hour != 7 and crawl_time.hour != 6:
             
-            if num == 0:
+            if key == 0:
                 crawl_time = set_time - timedelta(minutes=randrange(-5, 15, 5))
                 schedule.append(crawl_time)
+                key = 1
 
-            num = 1
             time_between_crawl = randint(90, 120)
             time_between_crawl = base * round(time_between_crawl/base)
             after_the_crawl = timedelta(minutes=time_between_crawl)
@@ -43,13 +41,15 @@ def get_a_schedule_rounded_to_5(set_time, base=5):
     return schedule_territories
 
 
-def get_date_and_time():
+def get_datetime():
     now = datetime.now()
-    set_time = datetime(now.year, now.month, now.day, hour=8, minute=0, second=0, microsecond=0)
-    return now, set_time
+    current_date = datetime(now.year, now.month, now.day)
+    set_time = datetime(now.year, now.month, now.day, hour=8, minute=0)
+    return current_date, set_time
 
 
 if __name__ == '__main__':
-    now, set_time = get_date_and_time()
-    schedule_territories = get_a_schedule_rounded_to_5(set_time)
-    world(now, schedule_territories)
+    objects = ['ГСМ', 'Cтоянка', 'Ангар']
+    current_date, set_time = get_datetime()
+    schedule_territories = get_schedule(set_time, objects)
+    save_file(schedule_territories, current_date)
