@@ -42,7 +42,7 @@ def get_schedule(set_time, objects, base=5):
 
                 territories.update({territory: schedule})
 
-        schedule_territories.update({num: territories})
+        schedule_territories.update({num+1: territories})
     return schedule_territories
 
 
