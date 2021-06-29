@@ -1,5 +1,2 @@
-os==20.2.3
-random==20.2.3
 datetime==20.2.3
 docxtpl==20.2.3
-argparse==21.1.3

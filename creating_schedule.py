@@ -55,7 +55,7 @@ def get_datetime():
 
 def get_args():
     parser = argparse.ArgumentParser(description='Получение расписания')
-    parser.add_argument('start', default='2', help='кол дней', type=int)
+    parser.add_argument('start', default='1', help='кол дней', type=int)
     args = parser.parse_args()
     return args
     
