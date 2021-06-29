@@ -11,12 +11,22 @@ pip install -r requirements.txt
 example:
 
 ```
-$ python создание_расписания.py
+$ python creating_schedule.py
 ```
 
 ### You will see
 
 The schedule file will appear in the directory with the code
+
+### Optional parameters argparse
+
+---start = number of days
+
+example:
+
+```
+python creating_schedule.py10
+```
 
 # Project Goals
 
