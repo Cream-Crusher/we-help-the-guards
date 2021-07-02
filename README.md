@@ -2,7 +2,7 @@
 
 ## How to start
 
-Python3 should be already installed.
+[Python3](https://www.python.org/downloads/) should be already installed.
 
 ```bash
 pip install -r requirements.txt
