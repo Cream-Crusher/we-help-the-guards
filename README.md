@@ -22,12 +22,12 @@ The schedule file will appear in the directory with the code
 
 ### Optional parameters argparse
 
----start = number of days
+--start = number of days
 
 example:
 
 ```
-python creating_schedule.py 10
+python creating_schedule.py --start 10
 ```
 
 # Project Goals
